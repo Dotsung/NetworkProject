@@ -3,12 +3,14 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session');
-var fs = require("fs")
+var fs = require("fs");
+
+var Goout = require('./models/goout');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var router = require('./router/index')(app, fs);
+var router = require('./router/index')(app, Goout);
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
