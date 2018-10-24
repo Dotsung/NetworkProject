@@ -7,6 +7,12 @@ module.exports = function(app, Goout)
         })
     });
 
+    app.get('/lab',function(req,res){
+        res.render('lab', {
+            title : "lab실 신청"
+        })
+    })
+
     // 잔류학생 관리
     app.get('/stay', function(req,res){
         Goout.find(function(err, goout){
@@ -19,11 +25,15 @@ module.exports = function(app, Goout)
             });
         });
     });
+    
+    app.get('/point',function(req,res){
+        
+    })
 
     app.get('/stay/goout', function(req,res){
         res.render('goout',{
-        })
-    })
+        });
+    });
 
     
 

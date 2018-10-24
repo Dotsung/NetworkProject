@@ -4,11 +4,15 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session');
 var fs = require("fs");
+var passport= require('passport');
 
 var Goout = require('./models/goout');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+mongoose.connect('mongodb://localhost/mongo_net')
+mongoose.Promise = global.Promise; 
 
 var router = require('./router/index')(app, Goout);
 
@@ -22,13 +26,7 @@ db.once('open', function(){
     console.log("Connnected to mongod server");
 });
 
-
-mongoose.connect('mongodb://localhost/mongo_net')
-
-
-var server = app.listen(3000, function(){
- console.log("Express server has started on port 3000")
-});
+require('./config/passport')(passport);
 
 app.use(express.static('public'));
 
@@ -39,3 +37,9 @@ app.use(session({
  resave: false,
  saveUninitialized: true
 }));
+//app.use(passport.initialize()); // passport 구동
+//app.use(passport.session()); // 세션 연결
+
+var server = app.listen(3000, function(){
+    console.log("Express server has started on port 3000")
+   });
