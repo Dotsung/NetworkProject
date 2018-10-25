@@ -11,13 +11,12 @@ module.exports = function(app, Goout, passport)
         }
     }
 
-    app.get('/',function(req,res){
+    app.get('/', function(req,res){
         user.find(function(err, user){
             if(err) return res.status(500).send({error: 'database failure'});
             res.render('index', {
                 title: "GSM 기숙사",
-                checkLogin : req.isAuthenticated(),
-                u : user
+                checkLogin : req.isAuthenticated()
             });
         });
     });
@@ -32,21 +31,19 @@ module.exports = function(app, Goout, passport)
         })
     });
 
-    app.get('/profile', isLoggedIn, function(req, res, next) {
-        res.render('index', { title: 'You are logged in.' });
-    });
+    
 
     app.post('/signup', passport.authenticate('signup', {
-        successRedirect : '/profile', 
-        failureRedirect : '/', //가입 실패시 redirect할 url주소
+        successRedirect : '/', 
+        failureRedirect : '/signup', //가입 실패시 redirect할 url주소
         failureFlash : true 
     }));
 
     app.post('/login', passport.authenticate('login', {
-        successRedirect : '/profile', 
-        failureRedirect : '/', //로그인 실패시 redirect할 url주소
-        failureFlash : true
-    }));
+        successRedirect : '/', 
+        failureRedirect : '/login', //로그인 실패시 redirect할 url주소
+        failureFlash : true 
+    }))
 
     app.get('/lab',function(req,res){
         res.render('lab', {
@@ -62,7 +59,7 @@ module.exports = function(app, Goout, passport)
             //var data = JSON.parse(goout);
             res.render('stay',{
                 title: "잔류",
-                Goout: goout,
+                Goout: goout
             });
         });
     });
@@ -78,7 +75,7 @@ module.exports = function(app, Goout, passport)
 
     
 
-    app.post('/stay/goout/goout_process', function(req, res){
+    app.post('/stay/goout', function(req, res){
         var goout = new Goout();
         goout.student.name = req.body.name;
         goout.student.class = req.body.class;

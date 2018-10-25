@@ -14,19 +14,20 @@ module.exports = function(passport) {
     passport.use('signup', new LocalStrategy({
         usernameField : 'email',
         passwordField : 'password',
-        passReqToCallback : true 
+        passReqToCallback : true
     },
     function(req, email, password, done) {
         User.findOne({ 'email' : email }, function(err, user) {
             if (err) return done(err);
             if (user) {
+                console.log("이메일 존재");
                 return done(null, false, req.flash('signupMessage', '이메일이 존재합니다.'));
             } else {
                 var newUser = new User();
                 newUser.name = req.body.name;
                 newUser.email = email;
-                newUser.password = password; 
-                //newUser.password = newUser.generateHash(password); 
+                //newUser.password = password; 
+                newUser.password = newUser.generateHash(password); 
                 newUser.save(function(err) {
                     if (err)
                         throw err;
@@ -46,10 +47,15 @@ module.exports = function(passport) {
         User.findOne({ 'email' : email }, function(err, user) {
             if (err)
                 return done(err);
-            if (!user)
+            if (!user){
+                console.log("사용자 찾을 수 없음");
                 return done(null, false, req.flash('loginMessage', '사용자를 찾을 수 없습니다.'));
-            if (!user.validPassword(password))
+            }
+            if (!user.validPassword(password)){
+                console.log("비번다름");
                 return done(null, false, req.flash('loginMessage', '비밀번호가 다릅니다.')); 
+            }
+            console.log("로그인 성공");
             return done(null, user);
         });
     }));
