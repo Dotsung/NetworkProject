@@ -31,6 +31,10 @@ module.exports = function(app, Goout, passport)
         })
     });
 
+    app.get('/logout',function(req,res){
+        req.logout();
+        res.redirect('/');
+    });
     
 
     app.post('/signup', passport.authenticate('signup', {
