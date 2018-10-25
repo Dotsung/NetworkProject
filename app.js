@@ -11,10 +11,23 @@ var Goout = require('./models/goout');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost/mongo_net')
+app.use(passport.initialize()); // passport 구동
+app.use(passport.session()); // 세션 연결
+app.use(express.static('public'));
+
+var flash = require('connect-flash');
+app.use(flash());
+
+app.use(session({
+    secret: '@#@$MYSIGN#@$#$',
+    resave: false,
+    saveUninitialized: true
+   }));
+
+mongoose.connect('mongodb://localhost/mongo_net',{ useNewUrlParser: true })
 mongoose.Promise = global.Promise; 
 
-var router = require('./router/index')(app, Goout);
+var router = require('./router/index')(app, Goout, passport);
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -28,18 +41,7 @@ db.once('open', function(){
 
 require('./config/passport')(passport);
 
-app.use(express.static('public'));
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
-app.use(session({
- secret: '@#@$MYSIGN#@$#$',
- resave: false,
- saveUninitialized: true
-}));
-//app.use(passport.initialize()); // passport 구동
-//app.use(passport.session()); // 세션 연결
 
 var server = app.listen(3000, function(){
     console.log("Express server has started on port 3000")
-   });
+});
