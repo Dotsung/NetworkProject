@@ -74,6 +74,7 @@ module.exports = function(app, Goout, passport)
 
     app.get('/stay/goout', function(req,res){
         res.render('goout',{
+            checkLogin : req.isAuthenticated()
         });
     });
 

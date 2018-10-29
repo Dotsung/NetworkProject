@@ -15,7 +15,7 @@ app.use(session({
     secret: '@#@$MYSIGN#@$#$',
     resave: false,
     saveUninitialized: true
-   }));
+}));
    
 app.use(passport.initialize()); // passport 구동
 app.use(passport.session()); // 세션 연결
