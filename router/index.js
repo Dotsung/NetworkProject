@@ -82,13 +82,10 @@ module.exports = function(app, Goout, passport)
 
     app.post('/stay/goout', function(req, res){
         var goout = new Goout();
-        goout.student.name = req.body.name;
-        goout.student.class = req.body.class;
-        goout.student.number = req.body.number;
-        
-        goout.goout.starttime = req.body.starttime;
-        goout.goout.stoptime = req.body.stoptime;
-        goout.goout.why = req.body.why;
+        goout.student_id = req.user._id;
+        goout.starttime = req.body.starttime;
+        goout.stoptime = req.body.stoptime;
+        goout.why = req.body.why;
 
         goout.save(function(err){
             if(err){
