@@ -1,9 +1,10 @@
 var mongoose = require('mongoose');
 
 var gooutSchema = mongoose.Schema({
-    userid : String,
+    user_id : String,
     grade : String,
     class : String,
+    number : String,
     name : String
 });
 

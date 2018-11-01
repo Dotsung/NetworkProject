@@ -6,6 +6,8 @@ var session = require('express-session');
 var fs = require("fs");
 var passport= require('passport');
 
+// 다음에 할것 : 회원가입시 학생 정보 입력해서 두 DB합치기
+
 var Goout = require('./models/goout');
 
 app.use(bodyParser.urlencoded({ extended: true }));

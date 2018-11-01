@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var gooutSchema = new Schema({
-    student_id : String,
+    user_id : String,
     starttime : String,
     stoptime : String,
     why : String

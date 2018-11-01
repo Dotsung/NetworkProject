@@ -82,7 +82,7 @@ module.exports = function(app, Goout, passport)
 
     app.post('/stay/goout', function(req, res){
         var goout = new Goout();
-        goout.student_id = req.user._id;
+        goout.user_id = req.user._id;
         goout.starttime = req.body.starttime;
         goout.stoptime = req.body.stoptime;
         goout.why = req.body.why;
