@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var gooutSchema = mongoose.Schema({
+var studnetSchema = mongoose.Schema({
     user_id : String,
     grade : String,
     class : String,
@@ -8,4 +8,4 @@ var gooutSchema = mongoose.Schema({
     name : String
 });
 
-module.exports = mongoose.model('goout', gooutSchema);
+module.exports = mongoose.model('student',studnetSchema);

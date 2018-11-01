@@ -1,5 +1,7 @@
 var LocalStrategy = require('passport-local').Strategy
 var User = require('../models/user');
+var Student = require('../models/student');
+
 module.exports = function(passport) {
     passport.serializeUser(function(user, done) {
         done(null, user.id);
@@ -33,6 +35,18 @@ module.exports = function(passport) {
                         throw err;
                     console.log("저장 완료"+toString(newUser));
                     return done(null, newUser);
+                });
+                newStudent = new Student();
+                newStudent.user_id = newUser.id;
+                newStudent.grade = req.body.grade;
+                newStudent.class = req.body.class;
+                newStudent.number = req.body.number;
+                newStudent.name = req.body.name;
+
+                newStudent.save(function(err){
+                    if(err)
+                        throw err;
+                    console.log("학생 저장 완료");
                 });
             }
         });
