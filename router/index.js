@@ -57,13 +57,14 @@ module.exports = function(app, Goout, passport)
 
     // 잔류학생 관리
     app.get('/stay', function(req,res){
-        Goout.find(function(err, goout){
+        Goout.find({user_id : req.user._id }, function(err, goout){
             if(err) return res.status(500).send({error: 'database failure'});
             //res.json(goout);
             //var data = JSON.parse(goout);
+            console.log(goout);
             res.render('stay',{
                 title: "잔류",
-                Goout: goout
+                gooutInfo : goout
             });
         });
     });
@@ -78,8 +79,6 @@ module.exports = function(app, Goout, passport)
         });
     });
 
-    
-
     app.post('/stay/goout', function(req, res){
         var goout = new Goout();
         goout.user_id = req.user._id;
@@ -90,12 +89,10 @@ module.exports = function(app, Goout, passport)
         goout.save(function(err){
             if(err){
                 console.error(err);
-                res.json({result: 0});
                 return;
             }
-    
-            res.json({result: 1});
-    
+            console.log("저장");
+            res.redirect('/stay');
         });
 
     });
