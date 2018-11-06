@@ -3,22 +3,13 @@ module.exports = function(app, Goout, passport)
     // 메인 페이지
     var user = require('../models/user');
 
-    function isLoggedIn(req, res, next) {
-        if (req.isAuthenticated()){
-            return next();
-        } else {
-            res.redirect('/login');
-        }
-    }
-
     app.get('/', function(req,res){
-        user.find(function(err, user){
-            if(err) return res.status(500).send({error: 'database failure'});
-            res.render('index', {
-                title: "GSM 기숙사",
-                checkLogin : req.isAuthenticated()
-            });
-        });
+        if(req.isAuthenticated()){
+            res.render('index');
+        }else{
+            res.render('start');
+        }
+            
     });
 
     app.get('/signup',function(req,res){
