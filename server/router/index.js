@@ -5,6 +5,7 @@ module.exports = function(app, Goout, passport)
     var Student = require('../models/student');
     var GreenPoint = require('../models/greenpoint');
     var RedPoint = require('../models/redpoint');
+    var Music = require('../models/music');
 
     app.get('/', function(req,res){
         if(req.isAuthenticated()){
@@ -137,6 +138,30 @@ module.exports = function(app, Goout, passport)
                 console.log("저장");
                 res.redirect('/point');
             });
+        });
+    });
+
+    app.get('/music',function(req,res){
+        Music.find(function(err,music){
+            res.render('music',{
+                musicList: music
+            });
+        });
+    });
+
+    app.post('/music/add',function(req,res){
+        var music = new Music();
+        music.user_id = req.user_id;
+        music.singer = req.body.singer;
+        music.title = req.body.title;
+
+       music.save(function(err){
+            if(err){
+                console.error(err);
+                return;
+            }
+            console.log("저장");
+            res.redirect('/music');
         });
     });
 
