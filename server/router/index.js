@@ -96,9 +96,9 @@ module.exports = function(app, Goout, passport)
         }, function(err,stu){
             if(err) return res.status(500).send({error: 'database failure'});
 
-            console.log(stu);
-            console.log('-----');
-            console.log(stu[0].user_id);
+            // console.log(stu);
+            // console.log('-----');
+            // console.log(stu[0].user_id);
 
             var gp = new GreenPoint();
             gp.user_id = stu[0].user_id;
@@ -113,7 +113,31 @@ module.exports = function(app, Goout, passport)
                 console.log("저장");
                 res.redirect('/point');
             });
-        })
+        });
+    });
+
+    app.post('/point/redpoint',function(req,res){
+        Student.find({
+            grade: req.body.grade,
+            class: req.body.class,
+            number: req.body.number,
+            name: req.body.name
+        }, function(err,stu){
+            if(err) return res.status(500).send({error: 'database failure'});
+            var rp = new RedPoint();
+            rp.user_id = stu[0].user_id;
+            rp.point = req.body.point;
+            rp.why = req.body.why;
+
+            rp.save(function(err){
+                if(err){
+                    console.error(err);
+                    return;
+                }
+                console.log("저장");
+                res.redirect('/point');
+            });
+        });
     });
 
     app.get('/stay/goout', function(req,res){
