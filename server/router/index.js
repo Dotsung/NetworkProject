@@ -2,6 +2,8 @@ module.exports = function(app, Goout, passport)
 {
     // 메인 페이지
     var user = require('../models/user');
+    var GreenPoint = require('../models/greenpoint');
+    var RedPoint = require('../models/redpoint');
 
     app.get('/', function(req,res){
         if(req.isAuthenticated()){
@@ -48,7 +50,7 @@ module.exports = function(app, Goout, passport)
 
     // 잔류학생 관리
     app.get('/stay', function(req,res){
-        Goout.find({user_id : req.user._id }, function(err, goout){
+        Goout.find(function(err, goout){
             if(err) return res.status(500).send({error: 'database failure'});
             //res.json(goout);
             //var data = JSON.parse(goout);
@@ -61,8 +63,26 @@ module.exports = function(app, Goout, passport)
     });
     
     app.get('/point',function(req,res){
-        
-    })
+        RedPoint.find({_id:req.user._id},function(err,redpoint){
+            if(err) return res.status(500).send({error: 'database failure'});
+            GreenPoint.find({_id:req.user._id},function(err,greenpoint){
+                res.render('point',{
+                    pointInfo: {
+                        RedPoint: redpoint,
+                        GreenPoint: greenpoint
+                    }
+                });
+            });
+        });
+    });
+
+    app.get('/point/add',function(req,res){
+        if(req.user._id == "5bdb10782bbf2917b127d52d"){
+            res.render('pointadd');
+        }else{
+            res.redirect('/point');
+        }
+    });
 
     app.get('/stay/goout', function(req,res){
         res.render('goout',{
