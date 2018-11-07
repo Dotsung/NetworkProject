@@ -65,9 +65,11 @@ module.exports = function(app, Goout, passport)
     
     app.get('/point',function(req,res){
         RedPoint.find({user_id:req.user._id},function(err,redpoint){
+            console.log('rp');
+            console.log(redpoint);
             if(err) return res.status(500).send({error: 'database failure'});
             GreenPoint.find({user_id: req.user._id},function(err,greenpoint){
-                console.log(redpoint);
+                console.log('gp');
                 console.log(greenpoint);
                 res.render('point',{
                     rp: redpoint,
