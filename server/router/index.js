@@ -1,7 +1,8 @@
 module.exports = function(app, Goout, passport)
 {
     // 메인 페이지
-    var user = require('../models/user');
+    var User = require('../models/user');
+    var Student = require('../models/student');
     var GreenPoint = require('../models/greenpoint');
     var RedPoint = require('../models/redpoint');
 
@@ -63,14 +64,14 @@ module.exports = function(app, Goout, passport)
     });
     
     app.get('/point',function(req,res){
-        RedPoint.find({_id:req.user._id},function(err,redpoint){
+        RedPoint.find({user_id:req.user._id},function(err,redpoint){
             if(err) return res.status(500).send({error: 'database failure'});
-            GreenPoint.find({_id:req.user._id},function(err,greenpoint){
+            GreenPoint.find({user_id: req.user._id},function(err,greenpoint){
+                console.log(redpoint);
+                console.log(greenpoint);
                 res.render('point',{
-                    pointInfo: {
-                        RedPoint: redpoint,
-                        GreenPoint: greenpoint
-                    }
+                    rp: redpoint,
+                    gp: greenpoint
                 });
             });
         });
@@ -82,6 +83,35 @@ module.exports = function(app, Goout, passport)
         }else{
             res.redirect('/point');
         }
+    });
+
+    app.post('/point/greenpoint',function(req,res){
+        Student.find({
+            grade: req.body.grade,
+            class: req.body.class,
+            number: req.body.number,
+            name: req.body.name
+        }, function(err,stu){
+            if(err) return res.status(500).send({error: 'database failure'});
+
+            console.log(stu);
+            console.log('-----');
+            console.log(stu[0].user_id);
+
+            var gp = new GreenPoint();
+            gp.user_id = stu[0].user_id;
+            gp.point = req.body.point;
+            gp.why = req.body.why;
+
+            gp.save(function(err){
+                if(err){
+                    console.error(err);
+                    return;
+                }
+                console.log("저장");
+                res.redirect('/point');
+            });
+        })
     });
 
     app.get('/stay/goout', function(req,res){
