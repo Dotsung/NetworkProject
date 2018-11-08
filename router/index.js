@@ -11,7 +11,7 @@ module.exports = function(app, Goout, passport)
         if(req.isAuthenticated()){
             res.render('index');
         }else{
-            res.render('start');
+            res.render('login');
         }
             
     });
