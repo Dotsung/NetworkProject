@@ -12,25 +12,28 @@
         </div>
         <div class="col-md-3">
           <div class="login-box well" style="text-align:left;">
-        <form accept-charset="UTF-8" role="form" method="post" action="">
-            <legend>로그인</legend>
-            <div class="form-group">
-                <label for="email">이메일</label>
-                <input name="user_id" value='' id="email" placeholder="E-mail" type="text" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="password">비밀번호</label>
-                <input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" value="Login" />
-            </div>
-            <span class='text-center'><a href="/bbs/index.php?mid=index&act=dispMemberFindAccount" class="text-sm">비밀번호 찾기</a></span>
-            <hr />
-            <div class="form-group">
-                <a href="" class="btn btn-default btn-block m-t-md"> 회원가입</a>
-            </div>
-        </form>
+            <form accept-charset="UTF-8" role="form" method="post" action="login">
+                <legend>로그인</legend>
+                <div class="form-group">
+                    <label for="email">이메일</label>
+                    <input name="email" value='' id="email" placeholder="E-mail" type="text" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="password">비밀번호</label>
+                    <input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" value="Login" />
+                </div>
+                <div style="color:red" class="text-sm"><%=errmsg%></div>
+                <span class='text-center'>
+                  <a href="/bbs/index.php?mid=index&act=dispMemberFindAccount" class="text-sm">비밀번호 찾기</a>
+                </span>
+                <hr />
+                <div class="form-group">
+                    <a href="/signup" class="btn btn-default btn-block m-t-md"> 회원가입</a>
+                </div>
+            </form>
           </div>
         </div>
       </div>

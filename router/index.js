@@ -11,18 +11,23 @@ module.exports = function(app, Goout, passport)
         if(req.isAuthenticated()){
             res.render('index');
         }else{
-            res.render('login');
+            res.redirect('/login');
         }
-            
+    });
+
+    app.get('/login',function(req,res){
+        var fmsg = req.flash();
+        if(fmsg.error){
+            var errMsg = fmsg.error[fmsg.error.length-1];
+            console.log(errMsg);
+        }
+        res.render('login',{
+            errmsg:errMsg
+        });
     });
 
     app.get('/signup',function(req,res){
         res.render('signup', {
-        })
-    });
-
-    app.get('/login',function(req,res){
-        res.render('login', {
         })
     });
 

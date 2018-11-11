@@ -22,8 +22,7 @@ module.exports = function(passport) {
         User.findOne({ 'email' : email }, function(err, user) {
             if (err) return done(err);
             if (user) {
-                console.log("이메일 존재");
-                return done(null, false, req.flash('signupMessage', '이메일이 존재합니다.'));
+                return done(null, false, {message:'이메일이 존재합니다.'});
             } else {
                 var newUser = new User();
                 newUser.name = req.body.name;
@@ -33,7 +32,6 @@ module.exports = function(passport) {
                 newUser.save(function(err) {
                     if (err)
                         throw err;
-                    console.log("저장 완료"+toString(newUser));
                     return done(null, newUser);
                 });
                 newStudent = new Student();
@@ -46,7 +44,6 @@ module.exports = function(passport) {
                 newStudent.save(function(err){
                     if(err)
                         throw err;
-                    console.log("학생 저장 완료");
                 });
             }
         });
@@ -58,18 +55,15 @@ module.exports = function(passport) {
         passReqToCallback : true 
     },
     function(req, email, password, done) { 
-        User.findOne({ 'email' : email }, function(err, user) {
+        User.findOne({ 'email': email }, function(err, user) {
             if (err)
                 return done(err);
             if (!user){
-                console.log("사용자 찾을 수 없음");
-                return done(null, false, req.flash('loginMessage', '사용자를 찾을 수 없습니다.'));
+                return done(null, false, {message:'사용자를 찾을 수 없습니다.'});
             }
             if (!user.validPassword(password)){
-                console.log("비번다름");
-                return done(null, false, req.flash('loginMessage', '비밀번호가 다릅니다.')); 
+                return done(null, false, {message:'비밀번호가 다릅니다.'}); 
             }
-            console.log("로그인 성공");
             return done(null, user);
         });
     }));
