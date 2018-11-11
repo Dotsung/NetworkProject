@@ -197,3 +197,5 @@ router.post('/stay/goout', function (req, res) {
     });
 
 });
+
+module.exports = router;
