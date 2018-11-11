@@ -32,16 +32,23 @@
         <%console.log(gooutInfos[i])%>
         <% Student.find({user_id:gooutInfos[i].user_id},function(err,stu){ %>
         <tr>
-          <td><%= stu.grade %></td>
-          <td><%= stu.class %></td>
-          <td><%= stu.number %></td>
-          <td><%= stu.name %></td>
-          <td><%= gooutInfos[i].date %></td>
-          <td>7<%= gooutInfos[i].starttime %></td>
-          <td>8<%= gooutInfos[i].why %></td>
+          <td><%= stu[0].grade %></td>
+          <td><%= stu[0].class %></td>
+          <td><%= stu[0].number %></td>
+          <td><%= stu[0].name %></td>
         </tr>
           <%console.log('stu'+i);%>
-          <%console.log(stu);%>
+          <%console.log(stu[0]);%>
+          <%console.log('<tr>')%>
+          <%console.log(stu[0].grade)%>
+          <%console.log(stu[0].class)%>
+          <%console.log(stu[0].number)%>
+          <%console.log(stu[0].name)%>
+          <%console.log(gooutInfos[i].date)%>
+          <%console.log(gooutInfos[i].starttime)%>
+          <%console.log(gooutInfos[i].why)%>
+          <%console.log('</tr>')%>
+        
         <%})%>
       <%}%>
         
