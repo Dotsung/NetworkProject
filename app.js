@@ -6,7 +6,7 @@ var session = require('express-session');
 var fs = require("fs");
 var passport= require('passport');
 
-var Goout = require('./models/outing');
+var Goout = require('./models/goout');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

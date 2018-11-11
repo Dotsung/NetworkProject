@@ -21,11 +21,30 @@
     </tr>
     </thead>
     <tbody>
-      <% if(gooutInfo == null || gooutInfo.length == 0){ %>
+      <% if(gooutInfos == null || gooutInfos.length == 0){ %>
         <tr>
         <td class="noData" colspan="100"> There is no data to show :( </td>
         </tr>
       <% } %>
+
+      <% for(var i in gooutInfos){%>
+        <%console.log('key:'+i);%>
+        <%console.log(gooutInfos[i])%>
+        <% Student.find({user_id:gooutInfos[i].user_id},function(err,stu){ %>
+        <tr>
+          <td><%= stu.grade %></td>
+          <td><%= stu.class %></td>
+          <td><%= stu.number %></td>
+          <td><%= stu.name %></td>
+          <td><%= gooutInfos[i].date %></td>
+          <td>7<%= gooutInfos[i].starttime %></td>
+          <td>8<%= gooutInfos[i].why %></td>
+        </tr>
+          <%console.log('stu'+i);%>
+          <%console.log(stu);%>
+        <%})%>
+      <%}%>
+        
         <tr>
           <td>2</td>
           <td>2</td>
@@ -70,8 +89,7 @@
     </div>
    </div>
     <ul>
-    <%- gooutInfo %>
-    </ul>
+    <%- gooutInfos %>
     <h2><a href="/stay/goout">외박신청 하기</a></h2>
   </body>
 </html>

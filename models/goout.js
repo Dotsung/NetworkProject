@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var outingSchema = new Schema({
+var gooutSchema = new Schema({
     user_id : String,
     starttime : String,
     stoptime : String,
@@ -9,4 +9,4 @@ var outingSchema = new Schema({
     why : String
 });
 
-module.exports = mongoose.model('outing', outingSchema);
+module.exports = mongoose.model('goout', gooutSchema);

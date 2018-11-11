@@ -61,10 +61,11 @@ module.exports = function(app, Goout, passport)
             if(err) return res.status(500).send({error: 'database failure'});
             //res.json(goout);
             //var data = JSON.parse(goout);
-            console.log(goout);
+            // console.log(goout);
             res.render('stay',{
                 title: "잔류",
-                gooutInfo : goout
+                gooutInfos : goout,
+                Student: Student
             });
         });
     });
