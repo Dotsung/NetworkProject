@@ -21,6 +21,11 @@
     </tr>
     </thead>
     <tbody>
+      <% if(gooutInfo == null || gooutInfo.length == 0){ %>
+        <tr>
+        <td class="noData" colspan="100"> There is no data to show :( </td>
+        </tr>
+      <% } %>
         <tr>
           <td>2</td>
           <td>2</td>
