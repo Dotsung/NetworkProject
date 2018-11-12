@@ -1,38 +1,65 @@
+<!DOCTYPE html>
 <html>
   <head>
-  <title>회원가입</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+  <% include partials/head %>
+  <style>
+  #formobj{
+    margin-top:30px;
+  }
+  </style>
+  <title>GSM</title>
   </head>
   <body>
-    <h1>회원가입</h1>
-    <form action="/signup" method="post">
-      <div>
-        <label>Email:</label>
-        <input type="text" name="email"/>
-      </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" name="password"/>
-      </div>
-      <div>
-        <label>학년:</label>
-        <input type="text" name="grade"/>
-      </div>
-      <div>
-        <label>반:</label>
-        <input type="text" name="class"/>
-      </div>
-      <div>
-        <label>번호:</label>
-        <input type="text" name="number"/>
-      </div>
-      <div>
-        <label>이름:</label>
-        <input type="text" name="name"/>
-      </div>
-      <div>
-        <input type="submit" value="회원가입"/>
-      </div>
-    </form>
+  <div class="container" style="text-align:center;">
+      <div class="row">
+        <div class="page-header">
+          <a href="/"><h2>기숙사 관리 시스템</h2></a>
+        </div>
+          <div class="container" style="text-align:left;">
+            <form accept-charset="UTF-8" role="form" method="post" action="signup" class="form-horizontal">
+                <div class="form-group" id="formobj">
+                    <label for="email" class="col-sm-2 control-label">이메일</label>
+                    <div class="col-sm-9">
+                      <input name="email" value='' id="email" placeholder="E-mail" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group" id="formobj">
+                    <label for="password" class="col-sm-2 control-label">비밀번호</label>
+                    <div class="col-sm-9">
+                      <input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group" id="formobj">
+                    <label for="grade" class="col-sm-2 control-label">학년</label>
+                    <div class="col-sm-9">
+                      <input name="grade" id="grade" value='' placeholder="Grade" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group" id="formobj"> 
+                    <label for="class" class="col-sm-2 control-label">반</label>
+                    <div class="col-sm-9">
+                      <input name="class" id="class" value='' placeholder="Class" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group" id="formobj">
+                    <label for="number" class="col-sm-2 control-label">번호</label>
+                    <div class="col-sm-9">
+                      <input name="number" id="number" value='' placeholder="Number" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group" id="formobj">
+                    <label for="name" class="col-sm-2 control-label">이름</label>
+                    <div class="col-sm-9">
+                      <input name="name" id="name" value='' placeholder="Name" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div style="color:red" class="text-sm"><%=errmsg%></div>
+                <div class="form-group" style="text-align:center" id="formobj">
+                    <input type="submit" class="btn btn-default" value="가입하기" />
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
   </body>
 </html>

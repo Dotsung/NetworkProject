@@ -32,7 +32,13 @@ router.get('/login', function (req, res) {
 });
 
 router.get('/signup', function (req, res) {
+    var fmsg = req.flash();
+    if (fmsg.error) {
+        var errMsg = fmsg.error[fmsg.error.length - 1];
+        console.log(errMsg);
+    }
     res.render('signup', {
+        errmsg: errMsg
     })
 });
 
