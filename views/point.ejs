@@ -9,7 +9,13 @@
       <h1 style="text-align:left;">상/벌점 관리</h1>
       <hr/>
       <h4 style="margin-top:70px;">내 점수</h4>
-      <h1 style="margin-bottom:70px;"><span style="color:red;">벌점</span> 3점</h1>
+      <% var p = 0; %>
+      <% for(var i=0;i<rp.length;i++){ p -= rp[i].point } %>
+      <% for(var i=0;i<gp.length;i++){ p += gp[i].point } %>
+      <h1 style="margin-bottom:70px;">
+      <%if(p>0){%><span style="color:green;">상점</span> <%= p %>점<%}%>
+      <%if(p<=0){%><span style="color:red;">벌점</span> <%= -p %>점<%}%>
+      </h1>
       <hr/>
       <div class="container" style="text-align:left;">
       <div class="tabbable"> <!-- 왼쪽과 오른쪽 탭에만 필요 -->
