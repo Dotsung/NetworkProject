@@ -15,7 +15,12 @@ router.get('/findstu', function(req,res){
             res.send('error');
             return;
         }
-        res.send(stu);
+        res.send(
+          `<td>` + stu[0].grade + `</td>
+          <td>` + stu[0].class + `</td>
+          <td>` + stu[0].number + `</td>
+          <td>` + stu[0].name + `</td>`
+        );
     });
 });
 

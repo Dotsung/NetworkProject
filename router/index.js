@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
 var router = express.Router();
+var axios = require('axios');
 
 var passport = require('passport');
 var Goout = require('../models/goout');
@@ -9,6 +10,7 @@ var Student = require('../models/student');
 var GreenPoint = require('../models/greenpoint');
 var RedPoint = require('../models/redpoint');
 var Music = require('../models/music');
+
 
 router.get('/', function (req, res) {
     if (req.isAuthenticated()) {
