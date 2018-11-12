@@ -28,26 +28,40 @@
             </tr>
             </thead>
             <tbody>
-              <% for(var i=0;i<rp.length;i++){
+              <% for(var i=0;i<rp.length;i++){ %>
                 <tr>
-                  <td>formatDate("<%=rp[i].date%>".slice(0,15))</td>
-                  <td>rp[i].point
+                  <td><%= formatDate(rp[i].date) %></td>
+                  <td><%= rp[i].point %></td>
+                  <td><%= rp[i].why %></td>
                 </tr>
-              }
+              <%}%>
             </tbody> 
             </table>
           </div>
           <div class="tab-pane" id="tab2">
-            <p>안녕, 나는 부분 2에 있어.</p>
+            <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>날짜</th>
+                <th>점수</th>
+                <th>사유</th>
+            </tr>
+            </thead>
+            <tbody>
+              <% for(var i=0;i<gp.length;i++){ %>
+                <tr>
+                  <td><%= formatDate(gp[i].date) %></td>
+                  <td><%= gp[i].point %></td>
+                  <td><%= gp[i].why %></td>
+                </tr>
+              <%}%>
+            </tbody> 
+            </table>
           </div>
         </div>
 </div>
       </div>
     </div>
-    
-    <%= rp %>
-    <h2>상점</h2>
-    <%= gp %>
     <h1><a href="/point/add">상벌점 주기</a></h1>
   </body>
 </html>
