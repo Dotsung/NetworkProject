@@ -14,8 +14,8 @@
       <div class="container" style="text-align:left;">
       <div class="tabbable"> <!-- 왼쪽과 오른쪽 탭에만 필요 -->
         <ul class="nav nav-tabs">
-          <li class="active"><a href="#tab1" data-toggle="tab">상점기록</a></li>
-          <li><a href="#tab2" data-toggle="tab">벌점기록</a></li>
+          <li class="active"><a href="#tab1" data-toggle="tab">벌점기록</a></li>
+          <li><a href="#tab2" data-toggle="tab">상점기록</a></li>
         </ul>
         <div class="tab-content">
           <div class="tab-pane active" id="tab1">
@@ -30,7 +30,8 @@
             <tbody>
               <% for(var i=0;i<rp.length;i++){
                 <tr>
-                  <td>rp[i]</td>
+                  <td>formatDate("<%=rp[i].date%>".slice(0,15))</td>
+                  <td>rp[i].point
                 </tr>
               }
             </tbody> 

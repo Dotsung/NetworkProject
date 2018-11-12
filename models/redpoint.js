@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var redPointSchema = new Schema({
     user_id : String,
+    date : {type: Date, default: Date.now},
     point : Number,
     why : String
 });
