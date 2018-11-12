@@ -1,9 +1,49 @@
 <html>
   <head>
+  <% include partials/head %>
   <title>상벌점</title>
   </head>
   <body>
-    <h2>벌점</h2>
+  <% include partials/nav %>
+    <div class="container" style="text-align:center;">
+      <h1 style="text-align:left;">상/벌점 관리</h1>
+      <hr/>
+      <h4 style="margin-top:70px;">내 점수</h4>
+      <h1 style="margin-bottom:70px;"><span style="color:red;">벌점</span> 3점</h1>
+      <hr/>
+      <div class="container" style="text-align:left;">
+      <div class="tabbable"> <!-- 왼쪽과 오른쪽 탭에만 필요 -->
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#tab1" data-toggle="tab">상점기록</a></li>
+          <li><a href="#tab2" data-toggle="tab">벌점기록</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="tab1">
+            <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>날짜</th>
+                <th>점수</th>
+                <th>사유</th>
+            </tr>
+            </thead>
+            <tbody>
+              <% for(var i=0;i<rp.length;i++){
+                <tr>
+                  <td>rp[i]</td>
+                </tr>
+              }
+            </tbody> 
+            </table>
+          </div>
+          <div class="tab-pane" id="tab2">
+            <p>안녕, 나는 부분 2에 있어.</p>
+          </div>
+        </div>
+</div>
+      </div>
+    </div>
+    
     <%= rp %>
     <h2>상점</h2>
     <%= gp %>
