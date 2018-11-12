@@ -1,7 +1,7 @@
 <html>
   <head>
   <% include partials/head %>
-  <title><%= title %></title>
+  <title>잔류</title>
   </head>
   <body>
   <% include partials/nav %>
@@ -21,16 +21,11 @@
     </tr>
     </thead>
     <tbody>
-      <% if(gooutInfos == null || gooutInfos.length == 0){ %>
-        <tr>
-        <td class="noData" colspan="100"> There is no data to show :( </td>
-        </tr>
-      <% } %>
 
       <% for(var i in gooutInfos){%>
         <%console.log('key:'+i);%>
-        <%console.log(gooutInfos[i])%>
-        <% Student.find({user_id:gooutInfos[i].user_id},function(err,stu){ %>
+        <%console.log(gooutInfos[i]);%>
+        <% axios.get('/api/findstu',{ params: { user_id: gooutInfos[i].user_id } }).then( response => { console.log(response); });%>
         <tr>
           <td><%= stu[0].grade %></td>
           <td><%= stu[0].class %></td>
@@ -49,7 +44,6 @@
           <%console.log(gooutInfos[i].why)%>
           <%console.log('</tr>')%>
         
-        <%})%>
       <%}%>
         
         <tr>

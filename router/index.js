@@ -66,7 +66,6 @@ router.get('/stay', function (req, res) {
         //var data = JSON.parse(goout);
         // console.log(goout);
         res.render('stay', {
-            title: "잔류",
             gooutInfos: goout,
             Student: Student
         });
