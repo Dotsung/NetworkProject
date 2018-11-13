@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var musicSchema = new Schema({
     user_id : String,
+    date : {type: Date, default: Date.now},
     singer: String,
     title: String
 });
