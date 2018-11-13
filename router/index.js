@@ -11,6 +11,17 @@ var GreenPoint = require('../models/greenpoint');
 var RedPoint = require('../models/redpoint');
 var Music = require('../models/music');
 
+var formatDate = function(date) {
+    var d = new Date(date), 
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+} 
 
 router.get('/', function (req, res) {
     if (req.isAuthenticated()) {
@@ -92,17 +103,7 @@ router.get('/point', function (req, res) {
                 isAdmin: (req.user._id == "5bdb10782bbf2917b127d52d"),
                 rp: redpoint,
                 gp: greenpoint,
-                formatDate: function(date) {
-                    var d = new Date(date), 
-                    month = '' + (d.getMonth() + 1),
-                    day = '' + d.getDate(),
-                    year = d.getFullYear();
-              
-                    if (month.length < 2) month = '0' + month;
-                    if (day.length < 2) day = '0' + day;
-              
-                    return [year, month, day].join('-');
-                  } 
+                formatDate: formatDate
             });
         });
     });
@@ -172,7 +173,8 @@ router.post('/point/redpoint', function (req, res) {
 router.get('/music', function (req, res) {
     Music.find(function (err, music) {
         res.render('music', {
-            musicList: music
+            musicList: music,
+            formatDate: formatDate
         });
     });
 });
