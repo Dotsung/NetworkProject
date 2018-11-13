@@ -89,6 +89,7 @@ router.get('/point', function (req, res) {
             console.log('gp');
             console.log(greenpoint);
             res.render('point', {
+                isAdmin: (req.user._id == "5bdb10782bbf2917b127d52d"),
                 rp: redpoint,
                 gp: greenpoint,
                 formatDate: function(date) {
