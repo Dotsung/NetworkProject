@@ -1,6 +1,8 @@
 var express = require('express');
 var path = require('path');
 var router = express.Router();
+var cheerio = require('cheerio');
+var request = require('request');
 
 var User = require('../models/user');
 var Student = require('../models/student');
@@ -23,6 +25,8 @@ router.get('/findstu', function(req,res){
         );
     });
 });
+
+router.get('/melonfind')
 
 router.get('/', function(req,res){
     res.send('a');

@@ -29,6 +29,7 @@
         rr += "<td>" + formatDate("<%=gooutInfos[i].date%>".slice(0,15)) + "</td>";
         rr += "<td>" + "<%=gooutInfos[i].starttime%>"+"~"+"<%=gooutInfos[i].stoptime%>"+ "</td>"; 
         rr += "<td>" + "<%=gooutInfos[i].why%>" + "</td>";
+        rr += "<td><a href=\"delete\" class=\"btn btn-default\">삭제</a></td>";
         rr += "</tr>"
         $("#result").append(rr);
       })
@@ -53,6 +54,7 @@
         <th>날짜</th>
         <th>시간</th>
         <th>사유</th>
+        <th>    </th>
     </tr>
     </thead>
     <tbody id="result">

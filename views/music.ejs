@@ -1,9 +1,27 @@
-<h1>노래 신청하기</h1>
+<html>
+  <head>
+  <% include partials/head %>
+  <title>gsm기숙사</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body>
+    <% include partials/nav %>
+    <div class="container">
+      <h1>노래 신청</h1>
+      <hr/>
 
-<%=musicList%>
-
-<form action="/music/add" method="post">
+    </div>
+    <%=musicList%>
+    <form action="/music/add" method="post">
     <p><input type="text" name=singer placeholder="가수">가수</p>
     <p><input type="text" name=title placeholder="제목">제목</p>
+    
     <p><input type="submit" value="신청하기"></p>
-</form>
+    </form>
+  </body>
+</html>
+
+
+
+
+
