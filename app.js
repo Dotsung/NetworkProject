@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(express.static('public'));
-
+//안녕
 app.use(session({
     secret: '@#@$MYSIGN#@$#$',
     resave: false,
