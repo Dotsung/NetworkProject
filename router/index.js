@@ -29,7 +29,7 @@ router.get('/', function (req, res) {
     } else {
         res.redirect('/login');
     }
-});
+}); 
 
 router.get('/login', function (req, res) {
     var fmsg = req.flash();

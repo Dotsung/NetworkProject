@@ -25,7 +25,7 @@ require('./config/passport')(passport);
 var flash = require('connect-flash');
 app.use(flash());
 
-mongoose.connect('mongodb://localhost/mongo_net',{ useNewUrlParser: true })
+mongoose.connect('mongodb://admin1:admin1@ds123664.mlab.com:23664/gsmwebapp',{ useNewUrlParser: true })
 mongoose.Promise = global.Promise; 
 
 app.set('views', __dirname + '/views');
