@@ -80,7 +80,7 @@ router.get('/point', function (req, res) {
             console.log('gp');
             console.log(greenpoint);
             res.render('point', {
-                isAdmin: (req.user._id == "5bdb10782bbf2917b127d52d"),
+                isAdmin: (req.user._id == "5c0df1a54222acb5d353df06"),
                 rp: redpoint,
                 gp: greenpoint,
                 formatDate: formatDate
@@ -90,7 +90,7 @@ router.get('/point', function (req, res) {
 });
 
 router.get('/point/add', function (req, res) {
-    if (req.user._id == "5bdb10782bbf2917b127d52d") {
+    if (req.user._id == "5c0df1a54222acb5d353df06") {
         res.render('pointadd');
     } else {
         res.redirect('/point');
