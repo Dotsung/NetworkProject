@@ -71,26 +71,6 @@ router.post('/login', passport.authenticate('login', {
     failureFlash: true
 }))
 
-router.get('/lab', function (req, res) {
-    res.render('lab', {
-        title: "lab실 신청"
-    })
-})
-
-// 잔류학생 관리
-router.get('/stay', function (req, res) {
-    Goout.find(function (err, goout) {
-        if (err) return res.status(500).send({ error: 'database failure' });
-        //res.json(goout);
-        //var data = JSON.parse(goout);
-        // console.log(goout);
-        res.render('stay', {
-            gooutInfos: goout,
-            Student: Student
-        });
-    });
-});
-
 router.get('/point', function (req, res) {
     RedPoint.find({ user_id: req.user._id }, function (err, redpoint) {
         console.log('rp');
@@ -195,6 +175,20 @@ router.post('/music/add', function (req, res) {
     });
 });
 
+// 잔류학생 관리
+router.get('/stay', function (req, res) {
+    Goout.find(function (err, goout) {
+        if (err) return res.status(500).send({ error: 'database failure' });
+        //res.json(goout);
+        //var data = JSON.parse(goout);
+        // console.log(goout);
+        res.render('stay', {
+            gooutInfos: goout,
+            Student: Student
+        });
+    });
+});
+
 router.get('/stay/goout', function (req, res) {
     res.render('goout', {
         checkLogin: req.isAuthenticated()
@@ -223,4 +217,7 @@ router.get('/lab', function (req, res){
     
 });
 
+router.get('/room', function(req,res){
+
+});
 module.exports = router;
