@@ -219,4 +219,8 @@ router.post('/stay/goout', function (req, res) {
 
 });
 
+router.get('/lab', function (req, res){
+    
+});
+
 module.exports = router;
