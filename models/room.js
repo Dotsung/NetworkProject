@@ -10,4 +10,4 @@ var roomSchema = new Schema({
 });
 
 
-module.exports = mongoose.model('goout', roomSchema);
+module.exports = mongoose.model('room', roomSchema);
