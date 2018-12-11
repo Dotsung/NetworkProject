@@ -215,7 +215,7 @@ router.post('/stay/goout', function (req, res) {
 });
 
 router.get('/lab', function (req, res){
-    
+     
 });
 
 router.get('/room', function (req,res){
@@ -231,7 +231,6 @@ router.get('/room/add', function(req,res){
 });
 
 router.post('/room/roomadd', function(req,res){
-    var search = new Array(4);
     var roomData = new Room();
 
     roomData.roomNum = req.body.roomNum;
@@ -240,59 +239,61 @@ router.post('/room/roomadd', function(req,res){
         class: req.body.class1,
         number: req.body.num1,
         name: req.body.stu1
-    }, function(err, stu){
+    }, function(err, stu1){
         if (err) return res.status(500).send({ error: 'database failure' });
-        roomData.user_id1 = stu[0].user_id;
-    });
-    Student.find({
-        grade: req.body.grade2,
-        class: req.body.class2,
-        number: req.body.num2,
-        name: req.body.stu2
-    }, function(err, stu){
-        if (err) return res.status(500).send({ error: 'database failure' });
-        roomData.user_id2 = stu[0].user_id;
-    });
-    Student.find({
-        grade: req.body.grade3,
-        class: req.body.class3,
-        number: req.body.num3,
-        name: req.body.stu3
-    }, function(err, stu){
-        if (err) return res.status(500).send({ error: 'database failure' });
-        roomData.user_id3 = stu[0].user_id;
-    });
-    if(req.body.grade4 == ""){
-        console.log('진입');
-        roomData.user_id4 = null
-    }
-    else{
+        roomData.user_id1 = stu1[0].user_id;
         Student.find({
-            grade: req.body.grade4,
-            class: req.body.class4,
-            number: req.body.num4,
-            name: req.body.stu4
-        }, function(err, stu){
-            if (err) {
-                return res.status(500).send({ error : 'database failure'});
-            }
-            roomData.user_id4 = stu[0].user_id;
-        });
-    }
+            grade: req.body.grade2,
+            class: req.body.class2,
+            number: req.body.num2,
+            name: req.body.stu2
+        }, function(err, stu2){
+            if (err) return res.status(500).send({ error: 'database failure' });
+            roomData.user_id2 = stu2[0].user_id;
+            Student.find({
+                grade: req.body.grade3,
+                class: req.body.class3,
+                number: req.body.num3,
+                name: req.body.stu3
+            }, function(err, stu3){
+                if (err) return res.status(500).send({ error: 'database failure' });
+                roomData.user_id3 = stu3[0].user_id;
+                if(req.body.grade4 == ""){
+                    console.log('진입');
+                    roomData.user_id4 = null
+                }
+                else{
+                    Student.find({
+                        grade: req.body.grade4,
+                        class: req.body.class4,
+                        number: req.body.num4,
+                        name: req.body.stu4
+                    }, function(err, stu4){
+                        if (err) {
+                            return res.status(500).send({ error : 'database failure'});
+                        }
+                        roomData.user_id4 = stu4[0].user_id;
+                    });
+                }
 
-    roomData.save(function (err){
-        if(err) {
-            console.log(err);
-            return;
-        }
-        console.log("호실명 : " + roomData.roomNum);
-        console.log("구성원1 : " + roomData.user_id1);
-        console.log("구성원2 : " + roomData.user_id2);
-        console.log("구성원3 : " + roomData.user_id3);
-        console.log("구성원4 : " + roomData.user_id4);
-        console.log("호실 저장 완료");
-        res.redirect('/room/add');
-    })
+                roomData.save(function (err){
+                    if(err) {
+                        console.log(err);
+                        return;
+                    }
+                    console.log("호실명 : " + roomData.roomNum);
+                    console.log("구성원1 : " + roomData.user_id1);
+                    console.log("구성원2 : " + roomData.user_id2);
+                    console.log("구성원3 : " + roomData.user_id3);
+                    console.log("구성원4 : " + roomData.user_id4);
+                    console.log("호실 저장 완료");
+                    res.redirect('/room/add');
+                })                
+            });            
+        });        
+    });
+    
+    
     
 });
 module.exports = router;
